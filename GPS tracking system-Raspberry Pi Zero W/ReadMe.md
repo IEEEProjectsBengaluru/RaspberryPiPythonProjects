@@ -1,8 +1,8 @@
-﻿**Build GPS tracking system using Raspberry Pi Zero W**
+# Build GPS tracking system using Raspberry Pi Zero W
 
 We will be able to build a GPS tracking system using Raspberry Pi Zero W. We will be designing data streaming and visualisation tool to view the detailed tracking information of a moving object.  
 
-**Hardware requirements**
+## Hardware requirements
 
 - GPS with UART terminals
 - [Raspberry Pi Zero W module](https://www.raspberrypi.com/products/raspberry-pi-zero/)
@@ -14,7 +14,7 @@ We will be able to build a GPS tracking system using Raspberry Pi Zero W. We wil
 - Portable Wi-Fi Dongle
 - Computer/Laptop
 
-**Software requirements**
+## Software requirements
 
 - Python
 - [Advanced IP Scanner](https://www.advanced-ip-scanner.com/)
@@ -23,11 +23,11 @@ We will be able to build a GPS tracking system using Raspberry Pi Zero W. We wil
 - [RealVNC](https://www.realvnc.com/en/raspberrypi/)
 - [u-center](https://www.u-blox.com/en/product/u-center)
 
-**Installing OS** 
+## Installing OS
 
 - Refer to [this](https://www.raspberrypi.com/documentation/computers/getting-started.html) link to install latest desktop version. 
 
-**Additional Configuration**
+## Additional Configuration
 
 - Add a blank ssh file and wpa\_supplicant.conf file after adding SSID and Password.
 - Use [Advanced IP Scanner](https://www.advanced-ip-scanner.com/) to find the IP address.
@@ -37,7 +37,7 @@ We will be able to build a GPS tracking system using Raspberry Pi Zero W. We wil
   - Enable VNC on the Raspberry Pi in raspi-config
 - Download [u-center](https://www.u-blox.com/en/product/u-center) / [VisualGPS](https://www.visualgps.net/) software to test the GPS module.
 
-**Set static IP address**
+## Set static IP address
 
 - Launch putty and login to the Raspberry Pi
 - Open dhcpcd.conf file 
@@ -46,7 +46,7 @@ We will be able to build a GPS tracking system using Raspberry Pi Zero W. We wil
 - Save, exit and reboot.
 - Note: You can use the same IP address to login that you have entered in dhcpcd.conf file.
 
-**Testing GPS Module on Computer**
+## Testing GPS Module on Computer
 
 - Connect GPS module to PC either with direct USB connection or with USB to UART converter module.
 - Ensure the required drivers are installed and a com port is visible in Device manager.
@@ -56,20 +56,20 @@ We will be able to build a GPS tracking system using Raspberry Pi Zero W. We wil
 - Launch [VisualGPS](https://www.visualgps.net/) and set the com port in settings.
 
 
-**Testing the GPS using Raspberry Pi**
+## Testing the GPS using Raspberry Pi
 
 - Connect GPS module to Raspberry Pi either using Serial pins or via USB
   - If you are using USB make sure that required driver is installed on the Raspberry Pi. You can confirm that by executing ‘$ lsusb’ on Raspberry Pi terminal.
-- ![](Aspose.Words.5a581c54-9086-4f53-9b84-eb6c2e788dc4.001.png)
+- <INSERT IMAGE HERE>
 - Find out the required serial port or USB port that GPS is connected to. You can get that info by executing ‘$ ls /dev/tty\*’ on Raspberry Pi terminal.
 - To see the incoming raw data from the serial or USB port then execute
   - $ cat /dev/tty<portnumber>
 
-**Understanding GPSD Daemon**
+## Understanding GPSD Daemon
 
 GPSD is service daemon that monitors one or more GPS or AIS receivers attached to a host computer through serial or USB ports making the data of the sensors available to be queries on the TCP port 2947 of the host computer. To know more refer to [this](https://gpsd.gitlab.io/gpsd/installation.html) link.  
 
-**Installation of GPSD**
+## Installation of GPSD
 
 - To install GPSD library execute following command on Raspberry Pi terminal
   - $ sudo apt-get install gpsd gpsd-clients python-gps -y
@@ -86,7 +86,7 @@ GPSD is service daemon that monitors one or more GPS or AIS receivers attached t
   - $ sudo gpsd /dev/tty<portnumber> -F /var/run/gpsd.sock
   - $ xgps
 
-**Steps to make sure GPSD runs on boot**
+## Steps to make sure GPSD runs on boot
 
 - Open gpsd file
   - $ sudo nano /etc/default/gpsd
@@ -94,7 +94,7 @@ GPSD is service daemon that monitors one or more GPS or AIS receivers attached t
   - START\_DAEMON=”true”
   - USBAUTO=”true”
   - GPSD\_OPTIONS=”/dev/tty<portnumber>”
-  - # At end of the file add
+  - #At end of the file add
   - GPSD\_SOCKET=”/var/run/gpsd.sock”
 - Enable and start gpsd.socket
   - $ sudo systemctl enable gpsd.socket
@@ -104,18 +104,18 @@ GPSD is service daemon that monitors one or more GPS or AIS receivers attached t
 - Execute following command you should be able to see GPS data without any further commands
   - $ cgps -s
 
-**Python code to get data from** 
+## Python code to get data from*
 
 - To view the raw data, execute the gps\_raw.py on the Raspberry Pi
   - $ sudo python gps\_raw.py
 - To fetch the required data from the GPS execute gps\_data.py
   - $ sudo python gps\_data.py
 
-**Ubidots**
+## Ubidots
 
 We will be using [Ubidots](https://ubidots.com/) as an IoT dashboard for real-time tracking of the GPS location. This is an IoT application builder with data analytics and visualisation, converts sensors data into information that matters for business decisions, machine to machine interactions and many more.
 
-**Dashboard installation and configuration**
+## Dashboard installation and configuration
 
 - Let’s create a sample random number visualisation in Ubidots.
 - Login to [Ubidots](https://ubidots.com/) first and add a device and open.
@@ -132,11 +132,11 @@ We will be using [Ubidots](https://ubidots.com/) as an IoT dashboard for real-ti
   - $ sudo python ubigps.py
 - Make ubigps.py to run on boot
   - $ sudo crontab -e
-  - # Add
+  - #Add
   - @reboot sudo python /home/pi/ubigps.py
 
 
-**Additional Info**
+## Additional Info
 
 - You can also use initialState IoT platform to visualise the same data.
 - To use initalState then run
