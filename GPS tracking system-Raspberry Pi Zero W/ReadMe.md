@@ -60,7 +60,7 @@ We will be able to build a GPS tracking system using Raspberry Pi Zero W. We wil
 
 - Connect GPS module to Raspberry Pi either using Serial pins or via USB
   - If you are using USB make sure that required driver is installed on the Raspberry Pi. You can confirm that by executing ‘$ lsusb’ on Raspberry Pi terminal.
-- <INSERT IMAGE HERE>
+-  <img src=https://github.com/IEEEProjectsBengaluru/RaspberryPiPythonProjects/blob/main/GPS%20tracking%20system-Raspberry%20Pi%20Zero%20W/config/Aspose.Words.5a581c54-9086-4f53-9b84-eb6c2e788dc4.001.png>
 - Find out the required serial port or USB port that GPS is connected to. You can get that info by executing ‘$ ls /dev/tty\*’ on Raspberry Pi terminal.
 - To see the incoming raw data from the serial or USB port then execute
   - $ cat /dev/tty<portnumber>
